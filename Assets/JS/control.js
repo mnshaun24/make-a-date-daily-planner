@@ -2,21 +2,26 @@
 
 $("#currentDay").append("Hi! This is your schedule for " + moment().format('dddd, MMM Do'));
 
-// create array for each time block
-// var hoursIndex = 0
+// create variables to count time
+
+var currentHour = moment().format("x");
+
+// create arrays for each time block
 
 var hours = ["8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"]
+var calendarEntry = ["", "", "", "", "", "", "", "", "", ""]
 
 // loop through array to display dynamically
 
 for (let i = 0; i < hours.length; i++) {
     var hoursDisplay = hours[i];
+    var clickedTime = i + 8
 
     // create parent div
-    var parentDiv = $("<div>").addClass("row");
+    var parentDiv = $("<div>").addClass("row").attr("id", hoursDisplay);
 
     // create hours and append
-    var newHour = $("<div>").addClass("time-block row-1 hour").text(hours[i]);
+    var newHour = $("<div>").addClass("time-block col-1 hour").text(hoursDisplay);
     $(parentDiv).append(newHour);
 
     // create and append text area
@@ -27,9 +32,15 @@ for (let i = 0; i < hours.length; i++) {
     var newButton = $("<button>").addClass("time-block saveBtn col-1").attr("width", "20");
     $(parentDiv).append(newButton);
 
+    // put icon on the button
+    var newIcon = $("<span>").addClass("fas fa-save");
+    $(newButton).append(newIcon);
+
     $(".container").append(parentDiv);
 };
+// end main loop
 
+// save button click logs to local storage
 
 $(".saveBtn").click(function() {
     var entry = $(this).siblings("textarea").val();
@@ -42,21 +53,22 @@ $(".saveBtn").click(function() {
     console.log(entry);
 });
 
+// load schedule on refresh or page load
+
 var loadSchedule = function() {
     entry = localStorage.getItem("entry");
     time = localStorage.getItem("time");
+};
+
+// check events for formatting
+
+function whatTime(timeCheck) {
+
+    if (timeCheck < currentHour) {
+        return "past";
+    } else if (timeCheck === currentHour) {
+        return "present";
+    } else {
+        return "future";
+    }
 }
-
-
-
-// // got the following code from class resource. Not sure how it works or what it's doing. But they suggested I use it.. update: and it broke all of my code. 
-// hours.forEach( function(hourString, index, array){
-//     console.log("hourString ", hourString)
-//     //console.log("index ", index) //comment this line back in whenever.
-//     // console.log("array ", array)  //comment this line back in if you like.
-  
-//     var newElem = $("p") //make a p-tag
-//     newElem.text(hourString) //give it some text (from hours array)
-//     $(".container").append(newElem) //throw that somewhere on the page.
-//     //all of this should be edited to make nice rows, textareas, and buttons of course.
-//   });
