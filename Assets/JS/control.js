@@ -13,17 +13,19 @@ for (let i = 0; i < hours.length; i++) {
     var hoursDisplay = hours[i];
 
     // create hours and append
-    var newHour = $("<div>").addClass("time-block row row-1 hour").text(hours[i]);
+    var newHour = $("<div>").addClass("time-block row-1 hour").text(hours[i]);
     $(".container").append(newHour);
 
     // create and append text area
-    var newText = $("<textarea>").addClass("time-block row description col-10")
-    $("newHour").append(newText);
+    var newText = $("<textarea>").addClass("time-block description col-10")
+    $(".container").append(newText);
 
     // create and append button
-    var newButton = $("<button>").addClass("time-block row saveBtn col-1").attr("width", "20");
-    $("newHour").append(newButton);
-}
+    var newButton = $("<button>").addClass("time-block saveBtn col-1").attr("width", "20");
+    $(".container").append(newButton);
+};
+
+
 
 
 
