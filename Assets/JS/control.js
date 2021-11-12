@@ -10,5 +10,11 @@ var hours = ["8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "
 
 
 // create code to append time block
-$.get(".container");
-$(".container").append(hours[0]);
+// $.get(".container");
+// $(".container").append(hours[0]);
+
+// create loop to display all hours from index
+$.each(hours, function() {
+    $.get(".container");
+    $(".container").append(hours[i])
+});
