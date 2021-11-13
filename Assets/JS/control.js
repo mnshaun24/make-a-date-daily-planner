@@ -4,7 +4,7 @@ $("#currentDay").append("Hi! This is your schedule for " + moment().format('dddd
 
 // create variables to count time
 
-var currentHour = moment().hours();
+var currentHour = "11"
 
 // create arrays for each time block
 
@@ -38,14 +38,24 @@ for (let i = 0; i < hours.length; i++) {
 
     $(".container").append(parentDiv);
 
-    // pull values from local storage and display for each hour
+    // pull values from local storage and display for each hour then color code
 
     var loadSchedule = function() {
         var entry = localStorage.getItem(milHours[i]);
         $("#" + milHours[i]).val(entry);
+
+        if (entry < currentHour) {
+            newText.addClass("past")           
+        } else if (entry == currentHour) {
+            newText.addClass("present")
+        } else {
+            newText.addClass("future")
+        };
     };
 
     loadSchedule();
+
+    // format each block to display color
     
 };
 // end main loop
@@ -61,16 +71,3 @@ $(".saveBtn").click(function() {
     console.log(time);
     console.log(entry);
 });
-
-// check events for formatting
-
-function whatTime(timeCheck) {
-
-    if (timeCheck < currentHour) {
-        return "past";
-    } else if (timeCheck === currentHour) {
-        return "present";
-    } else {
-        return "future";
-    }
-};
