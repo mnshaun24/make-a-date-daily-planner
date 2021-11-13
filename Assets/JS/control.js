@@ -4,12 +4,12 @@ $("#currentDay").append("Hi! This is your schedule for " + moment().format('dddd
 
 // create variables to count time
 
-var currentHour = moment().format("x");
+var currentHour = moment().hours();
 
 // create arrays for each time block
 
 var hours = ["8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"]
-var calendarEntry = ["", "", "", "", "", "", "", "", "", ""]
+var milHours = ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17"]
 
 // loop through array to display dynamically
 
@@ -18,14 +18,14 @@ for (let i = 0; i < hours.length; i++) {
     var clickedTime = i + 8
 
     // create parent div
-    var parentDiv = $("<div>").addClass("row").attr("id", hoursDisplay);
+    var parentDiv = $("<div>").addClass("row");
 
     // create hours and append
     var newHour = $("<div>").addClass("time-block col-1 hour").text(hoursDisplay);
     $(parentDiv).append(newHour);
 
     // create and append text area
-    var newText = $("<textarea>").addClass("time-block description col-10")
+    var newText = $("<textarea>").addClass("time-block description col-10").attr("id", milHours[i]);
     $(parentDiv).append(newText);
 
     // create and append button
@@ -37,6 +37,16 @@ for (let i = 0; i < hours.length; i++) {
     $(newButton).append(newIcon);
 
     $(".container").append(parentDiv);
+
+    // pull values from local storage and display for each hour
+
+    var loadSchedule = function() {
+        var entry = localStorage.getItem(milHours[i]);
+        $("#" + milHours[i]).val(entry);
+    };
+
+    loadSchedule();
+    
 };
 // end main loop
 
@@ -44,21 +54,13 @@ for (let i = 0; i < hours.length; i++) {
 
 $(".saveBtn").click(function() {
     var entry = $(this).siblings("textarea").val();
-    var time = $(this).parent(".row").text();
+    var time = $(this).siblings("textarea").attr("id");
 
-    localStorage.setItem ("entry", entry);
-    localStorage.setItem("time", time);
+    localStorage.setItem (time, entry);
 
     console.log(time);
     console.log(entry);
 });
-
-// load schedule on refresh or page load
-
-var loadSchedule = function() {
-    entry = localStorage.getItem("entry");
-    time = localStorage.getItem("time");
-};
 
 // check events for formatting
 
@@ -71,4 +73,4 @@ function whatTime(timeCheck) {
     } else {
         return "future";
     }
-}
+};
