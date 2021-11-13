@@ -2,11 +2,11 @@
 
 $("#currentDay").append("Hi! This is your schedule for " + moment().format('dddd, MMM Do'));
 
-// create variables to count time
+// create variable to count time
 
-var currentHour = "11"
+var currentHour = moment().hours();
 
-// create arrays for each time block
+// create array for time block display and second array to work behind the scenes
 
 var hours = ["8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"]
 var milHours = ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17"]
@@ -15,7 +15,7 @@ var milHours = ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17"]
 
 for (let i = 0; i < hours.length; i++) {
     var hoursDisplay = hours[i];
-    var clickedTime = i + 8
+    var timeCheck = i + 8
 
     // create parent div
     var parentDiv = $("<div>").addClass("row");
@@ -44,9 +44,9 @@ for (let i = 0; i < hours.length; i++) {
         var entry = localStorage.getItem(milHours[i]);
         $("#" + milHours[i]).val(entry);
 
-        if (entry < currentHour) {
+        if (timeCheck < currentHour) {
             newText.addClass("past")           
-        } else if (entry == currentHour) {
+        } else if (timeCheck == currentHour) {
             newText.addClass("present")
         } else {
             newText.addClass("future")
