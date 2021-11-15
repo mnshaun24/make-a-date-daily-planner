@@ -16,7 +16,7 @@ To build a daily planner that displays the business hours and saved tasks for th
 https://mnshaun24.github.io/make-a-date-daily-planner/
 
 ## Screenshot
-![Daily Planner](./assets/images/daily-scheduler)
+![Daily Planner](./Assets/Images/scheduler-screenshot.PNG)
 
 ## Contribution
 Shaun Sticka
