@@ -1,10 +1,10 @@
 ## Shaun's Daily Planner
 
-## Assignment
-This planner app fulfills the fifth weekly challenge for this course.
+## About
+A simple app that uses JQuery to produce a basic planner.
 
 ## Purpose
-To build a daily planner that displays the business hours and saved tasks for the current day
+To build a daily planner that displays the business hours and saved tasks for the current day. Practice JavaScript and JQuery as well as utilizing localstorage.
 
 ## Built With
 * HTML
